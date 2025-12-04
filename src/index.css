@@ -15,49 +15,50 @@
     --popover: 240 10% 8%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 199 89% 48%;
-    --primary-foreground: 240 10% 6%;
+  --primary: 0 0% 96%; /* primary neutral (near white) */
+  --primary-foreground: 0 0% 6%;
 
-    --secondary: 280 100% 70%;
-    --secondary-foreground: 240 10% 6%;
+  --secondary: 0 0% 80%; /* secondary neutral gray */
+  --secondary-foreground: 0 0% 6%;
 
-    --muted: 240 10% 15%;
-    --muted-foreground: 215 20% 65%;
+  --muted: 0 0% 18%;
+  --muted-foreground: 0 0% 70%;
 
-    --accent: 180 100% 50%;
-    --accent-foreground: 240 10% 6%;
+  --accent: 0 0% 96%;
+  --accent-foreground: 0 0% 6%;
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
+  --destructive: 0 0% 60%;
+  --destructive-foreground: 0 0% 96%;
 
-    --border: 240 10% 20%;
-    --input: 240 10% 15%;
-    --ring: 199 89% 48%;
+  --border: 0 0% 14%;
+  --input: 0 0% 12%;
+  --ring: 0 0% 96%;
 
     --radius: 1rem;
 
-    /* Neon colors */
-    --neon-blue: 199 89% 48%;
-    --neon-cyan: 180 100% 50%;
-    --neon-magenta: 300 100% 60%;
-    --neon-violet: 270 100% 65%;
-    --neon-purple: 280 100% 70%;
+  /* Neutral "neon" colors converted to dark/white theme */
+  /* Use white and black / neutral grays for typography and accents */
+  --neon-blue: 0 0% 100%;   /* pure white */
+  --neon-cyan: 0 0% 96%;    /* off-white for subtle highlights */
+  --neon-magenta: 0 0% 36%; /* mid gray for muted accents */
+  --neon-violet: 0 0% 12%;  /* dark gray / near-black */
+  --neon-purple: 0 0% 6%;   /* almost black */
 
-    /* Glass effect */
-    --glass-bg: 240 10% 10% / 60%;
-    --glass-border: 199 89% 48% / 20%;
+  /* Glass effect - neutral */
+  --glass-bg: 240 8% 8% / 60%;
+  --glass-border: 0 0% 100% / 6%;
 
-    /* Gradients */
-    --gradient-neon: linear-gradient(135deg, hsl(199 89% 48%), hsl(280 100% 70%));
-    --gradient-glow: linear-gradient(180deg, hsl(199 89% 48% / 0.2), transparent);
-    --gradient-radial: radial-gradient(ellipse at center, hsl(199 89% 48% / 0.15) 0%, transparent 70%);
+  /* Gradients - neutral black/white blends */
+  --gradient-neon: linear-gradient(135deg, hsl(var(--neon-blue) / 1), hsl(var(--neon-purple) / 1));
+  --gradient-glow: linear-gradient(180deg, hsl(var(--neon-blue) / 0.12), transparent);
+  --gradient-radial: radial-gradient(ellipse at center, hsl(var(--neon-blue) / 0.08) 0%, transparent 70%);
 
-    /* Shadows */
-    --shadow-neon: 0 0 20px hsl(199 89% 48% / 0.5), 0 0 40px hsl(199 89% 48% / 0.3);
-    --shadow-neon-sm: 0 0 10px hsl(199 89% 48% / 0.4);
-    --shadow-neon-lg: 0 0 30px hsl(199 89% 48% / 0.6), 0 0 60px hsl(199 89% 48% / 0.4);
-    --shadow-glow: 0 4px 30px hsl(199 89% 48% / 0.3);
-    --shadow-card: 0 8px 32px hsl(0 0% 0% / 0.4);
+  /* Shadows - subtle neutral glows */
+  --shadow-neon: 0 0 18px hsl(var(--neon-blue) / 0.12), 0 0 36px hsl(var(--neon-blue) / 0.06);
+  --shadow-neon-sm: 0 0 8px hsl(var(--neon-blue) / 0.08);
+  --shadow-neon-lg: 0 0 28px hsl(var(--neon-blue) / 0.14), 0 0 56px hsl(var(--neon-blue) / 0.06);
+  --shadow-glow: 0 4px 20px hsl(var(--neon-blue) / 0.08);
+  --shadow-card: 0 8px 32px hsl(0 0% 0% / 0.5);
 
     /* Fonts */
     --font-display: 'Space Grotesk', sans-serif;

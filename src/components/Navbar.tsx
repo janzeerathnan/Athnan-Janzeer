@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Home, User, Briefcase, Code, Mail, Menu, X } from "lucide-react";
+import { Home, User, Briefcase, Code, Mail, Menu, X, GraduationCap } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
   { id: "home", label: "Home", icon: Home },
   { id: "about", label: "About", icon: User },
+  { id: "education", label: "Education", icon: GraduationCap },
   { id: "skills", label: "Skills", icon: Code },
   { id: "projects", label: "Projects", icon: Briefcase },
   { id: "contact", label: "Contact", icon: Mail },
@@ -69,7 +70,7 @@ const Navbar = () => {
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: isVisible ? 0 : 100, opacity: isVisible ? 1 : 0 }}
         transition={{ duration: 0.3 }}
-        className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 hidden md:block"
+        className="fixed top-6 left-3/4 -translate-x-1/2 z-50 hidden md:block"
       >
         <div className="glass-strong rounded-full px-2 py-2 shadow-neon">
           <div className="flex items-center gap-1">

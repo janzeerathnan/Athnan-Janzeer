@@ -37,62 +37,56 @@ const About = () => {
           </motion.div>
 
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            {/* Avatar/Image */}
+            {/* Avatar / Image side */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.3 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
               className="relative"
             >
-              <div className="relative mx-auto w-64 h-64 md:w-80 md:h-80">
+              <div className="relative mx-auto w-72 h-72 md:w-96 md:h-96">
                 {/* Animated border */}
                 <motion.div
                   animate={{ rotate: 360 }}
-                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                  className="absolute inset-0 rounded-3xl border-2 border-primary/30"
-                  style={{ borderRadius: "30% 70% 70% 30% / 30% 30% 70% 70%" }}
+                  transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+                  className="absolute inset-0 rounded-3xl border-2 border-dashed border-neon-cyan/30"
                 />
                 
-                {/* Glow effect */}
-                <div className="absolute inset-4 bg-primary/20 rounded-2xl blur-2xl" />
-                
-                {/* Avatar container */}
-<motion.div
-  animate={{
-    borderRadius: [
-      "60% 40% 30% 70%/60% 30% 70% 40%",
-      "30% 60% 70% 40%/50% 60% 30% 60%",
-      "60% 40% 30% 70%/60% 30% 70% 40%",
-    ],
-  }}
-  transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-  className="absolute inset-4 bg-gradient-to-br from-primary/20 to-secondary/20 backdrop-blur-sm border border-primary/30 flex items-center justify-center overflow-hidden"
->
-  {/* Avatar Image */}
-  <img 
-    src="/assets/Athnan.jpeg" 
-    alt="Athnan Avatar" 
-    className="w-full h-full object-cover"
-  />
-</motion.div>
+                {/* Main container */}
+                <div className="absolute inset-4 rounded-2xl glass border border-neon-cyan/20 overflow-hidden">
+                  {/* Placeholder avatar */}
+                  <div className="w-full h-full bg-gradient-to-br from-neon-cyan/20 to-neon-magenta/20 flex items-center justify-center">
+                    <span className="font-display text-8xl font-bold bg-gradient-neon bg-clip-text text-transparent">
+                      <img src="../../public/assets/Athnan.jpeg" alt="" />
+                    </span>
+                  </div>
+                </div>
 
-                {/* Floating elements */}
+                {/* Floating badges */}
                 <motion.div
-                  animate={{ y: [-10, 10, -10] }}
-                  transition={{ duration: 4, repeat: Infinity }}
-                  className="absolute -top-4 -right-4 w-12 h-12 rounded-full bg-primary/20 backdrop-blur-sm border border-primary/30 flex items-center justify-center"
+                  animate={{ y: [-5, 5, -5] }}
+                  transition={{ duration: 3, repeat: Infinity }}
+                  className="absolute -top-4 -right-4 glass px-4 py-2 rounded-xl border border-neon-cyan/30"
                 >
-                  <span className="text-xl">💻</span>
+                  <div className="flex items-center gap-2 text-sm">
+                    <MapPin className="w-4 h-4 text-neon-cyan" />
+                    <span>Sri Lanka</span>
+                  </div>
                 </motion.div>
+
                 <motion.div
-                  animate={{ y: [10, -10, 10] }}
-                  transition={{ duration: 5, repeat: Infinity }}
-                  className="absolute -bottom-2 -left-2 w-10 h-10 rounded-full bg-secondary/20 backdrop-blur-sm border border-secondary/30 flex items-center justify-center"
+                  animate={{ y: [5, -5, 5] }}
+                  transition={{ duration: 4, repeat: Infinity }}
+                  className="absolute -bottom-4 -left-4 glass px-4 py-2 rounded-xl border border-neon-magenta/30"
                 >
-                  <span className="text-lg">🎨</span>
+                  <div className="flex items-center gap-2 text-sm">
+                    <Award className="w-4 h-4 text-neon-magenta" />
+                    <span>Award Winner</span>
+                  </div>
                 </motion.div>
               </div>
             </motion.div>
+
 
             {/* Content */}
             <motion.div
@@ -149,6 +143,33 @@ const About = () => {
                       </motion.div>
                     );
                   })}
+                </div>
+              </div>
+
+              {/* Core competencies */}
+              <div className="pt-8">
+                <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                  <Calendar className="w-5 h-5 text-neon-cyan" />
+                  Core Competencies
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {[
+                    'Team Coordination',
+                    'Client Communication',
+                    'Critical Thinking',
+                    'Task Prioritization',
+                    'Time Management',
+                    'Adaptability',
+                    'Leadership',
+                  ].map((skill) => (
+                    <motion.span
+                      key={skill}
+                      whileHover={{ scale: 1.05 }}
+                      className="px-3 py-1.5 text-sm glass rounded-lg border border-neon-cyan/20 hover:border-neon-cyan/50 transition-colors"
+                    >
+                      {skill}
+                    </motion.span>
+                  ))}
                 </div>
               </div>
             </motion.div>

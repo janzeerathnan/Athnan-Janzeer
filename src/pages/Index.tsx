@@ -5,6 +5,7 @@ import ParticleBackground from "@/components/ParticleBackground";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
+import { EducationSection } from "@/components/EducationSection";
 import Skills from "@/components/Skills";
 import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
@@ -32,6 +33,7 @@ const Index = () => {
         <Navbar />
         <Hero />
         <About />
+        <EducationSection />
         <Skills />
         <Projects />
         <Contact />

@@ -12,7 +12,7 @@ const Footer = () => {
             whileInView={{ opacity: 1 }}
             className="text-2xl font-display font-bold gradient-text"
           >
-            JA
+            AJ
           </motion.div>
 
           {/* Copyright */}
