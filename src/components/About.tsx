@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import AthnanImg from "@/public/assets/Athnan.jpeg";
 import { motion, useInView } from "framer-motion";
 import { Calendar, Briefcase, Award, MapPin } from "lucide-react";
 
@@ -57,7 +58,7 @@ const About = () => {
                   {/* Placeholder avatar */}
                   <div className="w-full h-full bg-gradient-to-br from-neon-cyan/20 to-neon-magenta/20 flex items-center justify-center">
                     <span className="font-display text-8xl font-bold bg-gradient-neon bg-clip-text text-transparent">
-                      <img src="../../public/assets/Athnan.jpeg" alt="" />
+                      <img src={AthnanImg} alt="Athnan Image" />
                     </span>
                   </div>
                 </div>

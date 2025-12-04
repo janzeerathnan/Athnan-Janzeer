@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import ResumePdf from "@/public/Athnan_Janzeer_Resume..pdf";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import {
   Mail,
@@ -343,7 +344,7 @@ const Contact = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ delay: 0.8 }}
-                ><a href="../public/Athnan_Janzeer_Resume..pdf">
+                ><a href={ResumePdf} target="_blank" rel="noopener noreferrer">
                 
                   <Button
                     variant="outline"
