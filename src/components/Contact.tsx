@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import ResumePdf from "@/public/Athnan_Janzeer_Resume..pdf";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import {
@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import emailjs from "@emailjs/browser";
 
 const socialLinks = [
   { icon: Github, href: "https://github.com/janzeerathnan", label: "GitHub" },
@@ -36,29 +37,31 @@ const Contact = () => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [focusedField, setFocusedField] = useState(null);
 
+  // Initialize EmailJS
+  useEffect(() => {
+    emailjs.init(import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     try {
-      // Create FormData object
-      const formDataToSend = new FormData();
-      formDataToSend.append("access_key", "c16d8ea3-b20b-473d-9681-8ada85900a71");
-      formDataToSend.append("name", formData.name);
-      formDataToSend.append("email", formData.email);
-      formDataToSend.append("message", formData.message);
-
-      // Send to Web3Forms API
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: formDataToSend,
-      });
-
-      const data = await response.json();
+      const result = await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+          reply_to: formData.email,
+        },
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      );
 
       setIsSubmitting(false);
 
-      if (data.success) {
+      if (result.status === 200) {
         setIsSuccess(true);
 
         toast({
@@ -72,10 +75,11 @@ const Contact = () => {
           setFormData({ name: "", email: "", message: "" });
         }, 3000);
       } else {
-        throw new Error(data.message || "Form submission failed");
+        throw new Error("Form submission failed");
       }
     } catch (error) {
       setIsSubmitting(false);
+      console.error("EmailJS error:", error);
       toast({
         title: "Error",
         description: "Something went wrong. Please try again or email directly.",
@@ -85,46 +89,46 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-24 md:py-32 relative">
+    <section id="contact" className="relative py-24 md:py-32">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
           animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.2, 0.1] }}
           transition={{ duration: 8, repeat: Infinity }}
-          className="absolute top-1/4 left-1/4 w-96 h-96 bg-muted/20 rounded-full blur-3xl"
+          className="absolute rounded-full top-1/4 left-1/4 w-96 h-96 bg-muted/20 blur-3xl"
         />
         <motion.div
           animate={{ scale: [1.2, 1, 1.2], opacity: [0.1, 0.15, 0.1] }}
           transition={{ duration: 10, repeat: Infinity }}
-          className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-muted/20 rounded-full blur-3xl"
+          className="absolute rounded-full bottom-1/4 right-1/4 w-80 h-80 bg-muted/20 blur-3xl"
         />
       </div>
 
-      <div className="section-container relative z-10">
+      <div className="relative z-10 section-container">
         <motion.div ref={ref}>
           {/* Section header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            className="mb-16 text-center"
           >
-            <h2 className="text-4xl md:text-5xl font-display font-bold mb-4 text-foreground">
+            <h2 className="mb-4 text-4xl font-bold md:text-5xl font-display text-foreground">
               Get In <span className="gradient-text">Touch</span>
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
+            <p className="max-w-2xl mx-auto text-muted-foreground">
               Have a project in mind? Let's create something amazing together.
             </p>
           </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
+          <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
             {/* Contact form */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <div className="glass rounded-3xl p-6 md:p-8">
+              <div className="p-6 glass rounded-3xl md:p-8">
                 <AnimatePresence mode="wait">
                   {isSuccess ? (
                     <motion.div
@@ -132,20 +136,20 @@ const Contact = () => {
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.8 }}
-                      className="flex flex-col items-center justify-center py-12 relative"
+                      className="relative flex flex-col items-center justify-center py-12"
                     >
                       <motion.div
                         initial={{ scale: 0 }}
                         animate={{ scale: [0, 1.2, 1] }}
                         transition={{ duration: 0.5 }}
-                        className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center mb-4"
+                        className="flex items-center justify-center w-20 h-20 mb-4 rounded-full bg-primary/20"
                       >
                         <CheckCircle className="w-10 h-10 text-primary" />
                       </motion.div>
-                      <h3 className="text-xl font-display font-semibold mb-2 text-foreground">
+                      <h3 className="mb-2 text-xl font-semibold font-display text-foreground">
                         Message Sent!
                       </h3>
-                      <p className="text-muted-foreground text-center">
+                      <p className="text-center text-muted-foreground">
                         Thanks for reaching out. I'll get back to you soon.
                       </p>
                       
@@ -187,7 +191,7 @@ const Contact = () => {
                                 ? "hsl(199 89% 48%)"
                                 : "hsl(215 20% 65%)",
                           }}
-                          className="absolute left-4 top-3 text-sm pointer-events-none origin-left"
+                          className="absolute text-sm origin-left pointer-events-none left-4 top-3"
                         >
                           Your Name
                         </motion.label>
@@ -216,7 +220,7 @@ const Contact = () => {
                                 ? "hsl(199 89% 48%)"
                                 : "hsl(215 20% 65%)",
                           }}
-                          className="absolute left-4 top-3 text-sm pointer-events-none origin-left"
+                          className="absolute text-sm origin-left pointer-events-none left-4 top-3"
                         >
                           Your Email
                         </motion.label>
@@ -246,7 +250,7 @@ const Contact = () => {
                                 ? "hsl(199 89% 48%)"
                                 : "hsl(215 20% 65%)",
                           }}
-                          className="absolute left-4 top-3 text-sm pointer-events-none origin-left"
+                          className="absolute text-sm origin-left pointer-events-none left-4 top-3"
                         >
                           Your Message
                         </motion.label>
@@ -260,7 +264,7 @@ const Contact = () => {
                           onBlur={() => setFocusedField(null)}
                           required
                           rows={5}
-                          className="bg-muted/50 border-border/50 rounded-xl focus:border-primary focus:ring-primary resize-none"
+                          className="resize-none bg-muted/50 border-border/50 rounded-xl focus:border-primary focus:ring-primary"
                         />
                       </div>
 
@@ -301,10 +305,10 @@ const Contact = () => {
             >
               <div className="space-y-8">
                 <div>
-                  <h3 className="text-2xl font-display font-semibold mb-4 text-foreground">
+                  <h3 className="mb-4 text-2xl font-semibold font-display text-foreground">
                     Let's work together
                   </h3>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <p className="leading-relaxed text-muted-foreground">
                     I'm always open to discussing new projects, creative ideas,
                     or opportunities to be part of your visions. Feel free to
                     reach out through the form or connect with me on social media.
@@ -313,7 +317,7 @@ const Contact = () => {
 
                 {/* Social links */}
                 <div>
-                  <h4 className="text-sm uppercase tracking-widest text-muted-foreground mb-4">
+                  <h4 className="mb-4 text-sm tracking-widest uppercase text-muted-foreground">
                     Connect with me
                   </h4>
                   <div className="flex gap-4">
@@ -329,7 +333,7 @@ const Contact = () => {
                           animate={isInView ? { opacity: 1, y: 0 } : {}}
                           transition={{ delay: 0.5 + index * 0.1 }}
                           whileHover={{ y: -4 }}
-                          className="w-12 h-12 rounded-xl glass flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-all"
+                          className="flex items-center justify-center w-12 h-12 transition-all rounded-xl glass text-muted-foreground hover:text-primary hover:border-primary/50"
                           aria-label={social.label}
                         >
                           <Icon className="w-5 h-5" />
