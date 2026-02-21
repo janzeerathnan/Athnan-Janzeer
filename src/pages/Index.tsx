@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import LoadingScreen from "@/components/LoadingScreen";
 import CustomCursor from "@/components/CustomCursor";
 import ParticleBackground from "@/components/ParticleBackground";
-import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import { EducationSection } from "@/components/EducationSection";
@@ -30,7 +29,6 @@ const Index = () => {
       <ParticleBackground />
       
       <main className="relative z-10">
-        <Navbar />
         <Hero />
         <About />
         <EducationSection />
