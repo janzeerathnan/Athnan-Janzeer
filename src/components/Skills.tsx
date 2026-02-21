@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { useIsMobile } from "@/hooks/use-performance";
 import { skills } from "@/data/projects";
 import { Code, Database, Wrench, Palette } from "lucide-react";
 
@@ -21,12 +22,13 @@ const SkillTag = ({
   index: number;
   isInView: boolean;
 }) => {
+  const isMobile = useIsMobile();
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.8 }}
       animate={isInView ? { opacity: 1, scale: 1 } : {}}
       transition={{ duration: 0.4, delay: index * 0.1 }}
-      whileHover={{ scale: 1.05, y: -2 }}
+      whileHover={!isMobile ? { scale: 1.05, y: -2 } : {}}
       className="group relative"
     >
       <div className="px-4 py-3 rounded-xl glass border border-border/50 hover:border-primary/50 transition-all duration-300 cursor-default">

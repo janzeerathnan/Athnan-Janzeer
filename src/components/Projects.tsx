@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { ExternalLink, Github, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useIsMobile } from "@/hooks/use-performance";
 import { projects } from "@/data/projects";
 
 const ProjectCard = ({
@@ -13,6 +14,7 @@ const ProjectCard = ({
   index: number;
   isInView: boolean;
 }) => {
+  const isMobile = useIsMobile();
   const isLeft = index % 2 === 0;
 
   return (
@@ -52,22 +54,24 @@ const ProjectCard = ({
 
       {/* Card */}
       <motion.div
-        whileHover={{ y: -8, rotateY: isLeft ? 2 : -2 }}
+        whileHover={!isMobile ? { y: -8, rotateY: isLeft ? 2 : -2 } : {}}
         transition={{ duration: 0.3 }}
         className={`relative w-full md:w-[calc(50%-3rem)] ${
           isLeft ? "md:mr-auto" : "md:ml-auto"
         }`}
-        style={{ perspective: 1000 }}
+        style={!isMobile ? { perspective: 1000 } : undefined}
       >
         {/* Background blob */}
-        <motion.div
-          animate={{
-            scale: [1, 1.1, 1],
-            rotate: [0, 5, 0],
-          }}
-          transition={{ duration: 8, repeat: Infinity }}
-          className={`absolute -inset-4 bg-gradient-to-br ${project.color} opacity-10 blur-2xl rounded-3xl`}
-        />
+        {!isMobile && (
+          <motion.div
+            animate={{
+              scale: [1, 1.1, 1],
+              rotate: [0, 5, 0],
+            }}
+            transition={{ duration: 8, repeat: Infinity }}
+            className={`absolute -inset-4 bg-gradient-to-br ${project.color} opacity-10 blur-2xl rounded-3xl`}
+          />
+        )}
 
         <div className="relative glass rounded-3xl overflow-hidden border border-primary/20 hover:border-primary/40 hover:shadow-neon-sm transition-all duration-300 group">
           {/* Image */}
@@ -142,6 +146,7 @@ const ProjectCard = ({
 };
 
 const Projects = () => {
+  const isMobile = useIsMobile();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const endRef = useRef(null);
@@ -169,12 +174,14 @@ const Projects = () => {
           {/* Timeline */}
           <div className="relative">
             {/* Center line */}
-            <motion.div
-              initial={{ height: 0 }}
-              animate={isInView ? { height: "100%" } : {}}
-              transition={{ duration: 1.5 }}
-              className="absolute left-1/2 -translate-x-1/2 w-px bg-gradient-to-b from-primary via-primary/50 to-transparent"
-            />
+            {!isMobile && (
+              <motion.div
+                initial={{ height: 0 }}
+                animate={isInView ? { height: "100%" } : {}}
+                transition={{ duration: 1.5 }}
+                className="absolute left-1/2 -translate-x-1/2 w-px bg-gradient-to-b from-primary via-primary/50 to-transparent"
+              />
+            )}
 
             {/* Projects */}
             {projects.map((project, index) => (
@@ -195,12 +202,15 @@ const Projects = () => {
               className="relative flex justify-center"
             >
               <div className="glass rounded-full p-4 border border-primary/30 shadow-neon">
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                >
-                  <Sparkles className="w-6 h-6 text-primary" />
-                </motion.div>
+                {!isMobile && (
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                  >
+                    <Sparkles className="w-6 h-6 text-primary" />
+                  </motion.div>
+                )}
+                {isMobile && <Sparkles className="w-6 h-6 text-primary" />}
               </div>
               <motion.p
                 initial={{ opacity: 0, y: 10 }}

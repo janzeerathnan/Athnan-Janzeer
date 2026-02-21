@@ -320,6 +320,11 @@ const Contact = () => {
                   <h4 className="mb-4 text-sm tracking-widest uppercase text-muted-foreground">
                     Connect with me
                   </h4>
+                  <div>
+                  <h4 className="mb-4 text-sm tracking-widest uppercase text-muted-foreground">
+                    +94 76 684 5867
+                  </h4>
+                </div>
                   <div className="flex gap-4">
                     {socialLinks.map((social, index) => {
                       const Icon = social.icon;
@@ -342,6 +347,7 @@ const Contact = () => {
                     })}
                   </div>
                 </div>
+                
 
                 {/* Download CV */}
                 <motion.div

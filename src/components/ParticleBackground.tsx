@@ -28,7 +28,11 @@ const ParticleBackground = () => {
 
     const createParticles = () => {
       const particles: Particle[] = [];
-      const particleCount = Math.min(100, Math.floor(window.innerWidth / 15));
+      // Reduce particles on mobile for better performance
+      const isMobile = window.innerWidth < 768;
+      const particleCount = isMobile 
+        ? Math.min(20, Math.floor(window.innerWidth / 30))
+        : Math.min(100, Math.floor(window.innerWidth / 15));
 
       for (let i = 0; i < particleCount; i++) {
         particles.push({
@@ -50,14 +54,21 @@ const ParticleBackground = () => {
       ctx.fillStyle = `rgba(200, 200, 200, ${particle.opacity})`;
       ctx.fill();
 
-      // Subtle glow effect
-      ctx.beginPath();
-      ctx.arc(particle.x, particle.y, particle.size * 2, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(180, 180, 180, ${particle.opacity * 0.2})`;
-      ctx.fill();
+      // Skip glow effect on mobile for better performance
+      const isMobile = window.innerWidth < 768;
+      if (!isMobile) {
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.size * 2, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(180, 180, 180, ${particle.opacity * 0.2})`;
+        ctx.fill();
+      }
     };
 
     const drawConnections = (particles: Particle[]) => {
+      // Skip connections on mobile for better performance
+      const isMobile = window.innerWidth < 768;
+      if (isMobile) return;
+      
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;

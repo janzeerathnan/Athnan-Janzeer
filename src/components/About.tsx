@@ -3,6 +3,7 @@ import AthnanImg from "@/public/assets/Athnan_img.jpeg";
 import AthnnAltImg from "@/public/assets/Athnan.jpeg";
 import { motion, useInView } from "framer-motion";
 import { Calendar, Briefcase, Award, MapPin } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-performance";
 
 const stats = [
   { label: "Years Experience", value: 1, icon: Calendar },
@@ -11,6 +12,7 @@ const stats = [
 ];
 
 const About = () => {
+  const isMobile = useIsMobile();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
@@ -48,11 +50,13 @@ const About = () => {
             >
               <div className="relative mx-auto w-72 h-72 md:w-96 md:h-96">
                 {/* Animated border */}
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-                  className="absolute inset-0 rounded-3xl border-2 border-dashed border-neon-cyan/30"
-                />
+                {!isMobile && (
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+                    className="absolute inset-0 rounded-3xl border-2 border-dashed border-neon-cyan/30"
+                  />
+                )}
                 
                 {/* Main container */}
                 <div className="absolute inset-4 rounded-2xl glass border border-neon-cyan/20 overflow-hidden">
@@ -65,27 +69,49 @@ const About = () => {
                 </div>
 
                 {/* Floating badges */}
-                <motion.div
-                  animate={{ y: [-5, 5, -5] }}
-                  transition={{ duration: 3, repeat: Infinity }}
-                  className="absolute -top-4 -right-4 glass px-4 py-2 rounded-xl border border-neon-cyan/30"
-                >
-                  <div className="flex items-center gap-2 text-sm">
-                    <MapPin className="w-4 h-4 text-neon-cyan" />
-                    <span>Sri Lanka</span>
-                  </div>
-                </motion.div>
+                {!isMobile && (
+                  <>
+                    <motion.div
+                      animate={{ y: [-5, 5, -5] }}
+                      transition={{ duration: 3, repeat: Infinity }}
+                      className="absolute -top-4 -right-4 glass px-4 py-2 rounded-xl border border-neon-cyan/30"
+                    >
+                      <div className="flex items-center gap-2 text-sm">
+                        <MapPin className="w-4 h-4 text-neon-cyan" />
+                        <span>Sri Lanka</span>
+                      </div>
+                    </motion.div>
 
-                <motion.div
-                  animate={{ y: [5, -5, 5] }}
-                  transition={{ duration: 4, repeat: Infinity }}
-                  className="absolute -bottom-4 -left-4 glass px-4 py-2 rounded-xl border border-neon-magenta/30"
-                >
-                  <div className="flex items-center gap-2 text-sm">
-                    <Award className="w-4 h-4 text-neon-magenta" />
-                    <span>Award Winner</span>
-                  </div>
-                </motion.div>
+                    <motion.div
+                      animate={{ y: [5, -5, 5] }}
+                      transition={{ duration: 4, repeat: Infinity }}
+                      className="absolute -bottom-4 -left-4 glass px-4 py-2 rounded-xl border border-neon-magenta/30"
+                    >
+                      <div className="flex items-center gap-2 text-sm">
+                        <Award className="w-4 h-4 text-neon-magenta" />
+                        <span>Award Winner</span>
+                      </div>
+                    </motion.div>
+                  </>
+                )}
+                
+                {isMobile && (
+                  <>
+                    <div className="absolute -top-4 -right-4 glass px-4 py-2 rounded-xl border border-neon-cyan/30">
+                      <div className="flex items-center gap-2 text-sm">
+                        <MapPin className="w-4 h-4 text-neon-cyan" />
+                        <span>Sri Lanka</span>
+                      </div>
+                    </div>
+
+                    <div className="absolute -bottom-4 -left-4 glass px-4 py-2 rounded-xl border border-neon-magenta/30">
+                      <div className="flex items-center gap-2 text-sm">
+                        <Award className="w-4 h-4 text-neon-magenta" />
+                        <span>Award Winner</span>
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
             </motion.div>
 

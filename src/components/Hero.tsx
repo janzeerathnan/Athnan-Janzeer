@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowDown, ExternalLink, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useIsMobile, usePrefersReducedMotion } from "@/hooks/use-performance";
 
 const roles = [
   "Software Engineer",
@@ -11,6 +12,8 @@ const roles = [
 
 const Hero = () => {
   const [currentRole, setCurrentRole] = useState(0);
+  const isMobile = useIsMobile();
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -35,38 +38,42 @@ const Hero = () => {
     >
       {/* Animated gradient background */}
       <div className="absolute inset-0 overflow-hidden">
-        <motion.div
-          animate={{
-            scale: [1, 1.2, 1],
-            rotate: [0, 180, 360],
-          }}
-          transition={{
-            duration: 30,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-          className="absolute -top-1/2 -left-1/2 w-full h-full bg-gradient-radial opacity-30"
-        />
-        <motion.div
-          animate={{
-            scale: [1.2, 1, 1.2],
-            x: [0, 100, 0],
-            y: [0, -50, 0],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute top-1/4 right-0 w-96 h-96 bg-muted/20 rounded-full blur-3xl"
-        />
+        {!isMobile && !prefersReducedMotion && (
+          <>
+            <motion.div
+              animate={{
+                scale: [1, 1.2, 1],
+                rotate: [0, 180, 360],
+              }}
+              transition={{
+                duration: 30,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+              className="absolute -top-1/2 -left-1/2 w-full h-full bg-gradient-radial opacity-30"
+            />
+            <motion.div
+              animate={{
+                scale: [1.2, 1, 1.2],
+                x: [0, 100, 0],
+                y: [0, -50, 0],
+              }}
+              transition={{
+                duration: 20,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              className="absolute top-1/4 right-0 w-96 h-96 bg-muted/20 rounded-full blur-3xl"
+            />
+          </>
+        )}
       </div>
 
       <div className="section-container relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: isMobile ? 0.3 : 0.8, delay: 0.2 }}
           className="text-left max-w-4xl"
         >
           {/* Greeting */}
@@ -146,26 +153,28 @@ const Hero = () => {
       </div>
 
       {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="absolute bottom-24 md:bottom-32 left-1/2 -translate-x-1/2"
-      >
-        <motion.button
-          onClick={() =>
-            document
-              .getElementById("about")
-              ?.scrollIntoView({ behavior: "smooth" })
-          }
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
+      {!isMobile && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5 }}
+          className="absolute bottom-24 md:bottom-32 left-1/2 -translate-x-1/2"
         >
-          <span className="text-xs uppercase tracking-widest">Scroll</span>
-          <ArrowDown className="w-4 h-4" />
-        </motion.button>
-      </motion.div>
+          <motion.button
+            onClick={() =>
+              document
+                .getElementById("about")
+                ?.scrollIntoView({ behavior: "smooth" })
+            }
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
+          >
+            <span className="text-xs uppercase tracking-widest">Scroll</span>
+            <ArrowDown className="w-4 h-4" />
+          </motion.button>
+        </motion.div>
+      )}
     </section>
   );
 };
