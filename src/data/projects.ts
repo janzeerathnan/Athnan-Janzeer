@@ -13,6 +13,9 @@ import DreamWearImg from "@/public/Dream-Wear.jpeg";
 import CrudImg from "@/public/crud.jpg";
 import HrmsImg from "@/public/hrms.jpeg";
 import TimerImg from "@/public/Timer.webp";
+import vulnerblityImg from "@/public/Vulnerblity.png"
+import BillingImg from "@/public/BillingSys.png"
+import ZaraFashionImg from "@/public/Zara-Fashion.png"
 
 export const projects: Project[] = [
   {
@@ -35,15 +38,6 @@ export const projects: Project[] = [
   },
   {
     id: 3,
-    title: "CRUD Application Mern-Stack",
-    description: "Build CRUD Application using Mern-stack technology.",
-    technologies: ["Node.js", "Express.js", "React.js", "MongoDB", "Tailwind Css"],
-  image: CrudImg,
-    codeUrl: "https://github.com/janzeerathnan/MERN-Stack.git",
-    color: "from-neon-cyan to-neon-blue"
-  },
-  {
-    id: 4,
     title: "HR Management System Full-Stack",
     description: "hands-on experience building a comprehensive HR Management System integrating biometric attendance and leave management functionalities.",
     technologies: ["React Native", "Laravel", "My-sql", "Metrial Css"],
@@ -52,11 +46,29 @@ export const projects: Project[] = [
     color: "from-neon-violet to-neon-purple"
   },
     {
+    id: 4,
+    title: "Baner Scan",
+    description: "Baner Scanner is an automated cybersecurity tool designed to scan local machines or network targets to identify potential security vulnerabilities. Built with Python and powered by Nmap, it provides comprehensive vulnerability analysis with detailed reporting.",
+    technologies: ["Python", "Bash"],
+  image: vulnerblityImg,
+    codeUrl: "https://github.com/janzeerathnan/ICST_Timer.git",
+    color: "from-neon-violet to-neon-purple"
+  },
+    {
     id: 5,
-    title: "Online Timer App",
+    title: "Billing System",
     description: "Online timer application designed to help users manage their time effectively with features like start, pause, and reset.",
-    technologies: ["React Native", "Tailwind Css"],
-  image: TimerImg,
+    technologies: ["PHP", "Tailwind Css" , "My Sql"],
+  image: BillingImg,
+    codeUrl: "https://github.com/janzeerathnan/ICST_Timer.git",
+    color: "from-neon-violet to-neon-purple"
+  },
+    {
+    id: 6,
+    title: "ZARA Mobile App",
+    description: "ZARA Fashion is a comprehensive, production-ready Flutter e-commerce mobile application",
+    technologies: ["Flutter", "Dart" , "FireBase"],
+  image: ZaraFashionImg,
     codeUrl: "https://github.com/janzeerathnan/ICST_Timer.git",
     color: "from-neon-violet to-neon-purple"
   }
@@ -69,18 +81,19 @@ export const skills = {
     { name: "Type-Script", level: 40 },
     { name: "HTML", level: 90 },
     { name: "Tailwind CSS", level: 60 },
-    { name: "Bootstrap CSS", level: 60 }
+    { name: "Bootstrap CSS", level: 60 },
+    { name:"Flutter" , level: 50}
   ],
   backend: [
     { name: "Node.js", level: 40 },
     { name: "Python", level: 50 },
     { name: "PHP", level: 60 },
     { name: "Laravel", level: 60 },
+    { name: "Fire Base" , level: 60}
   ],
   tools: [
     { name: "Git", level: 75 },
     { name: "Docker", level: 40 },
-    { name: "Firebase", level: 50 },
     { name: "jira", level: 70 },
     { name: "Linux", level: 70 }
   ],
