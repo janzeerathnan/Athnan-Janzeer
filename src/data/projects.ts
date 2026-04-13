@@ -51,7 +51,7 @@ export const projects: Project[] = [
     description: "Baner Scanner is an automated cybersecurity tool designed to scan local machines or network targets to identify potential security vulnerabilities. Built with Python and powered by Nmap, it provides comprehensive vulnerability analysis with detailed reporting.",
     technologies: ["Python", "Bash"],
   image: vulnerblityImg,
-    codeUrl: "https://github.com/janzeerathnan/ICST_Timer.git",
+    codeUrl: "https://github.com/janzeerathnan/Vulnerability-Scanner.git",
     color: "from-neon-violet to-neon-purple"
   },
     {
@@ -60,7 +60,7 @@ export const projects: Project[] = [
     description: "Online timer application designed to help users manage their time effectively with features like start, pause, and reset.",
     technologies: ["PHP", "Tailwind Css" , "My Sql"],
   image: BillingImg,
-    codeUrl: "https://github.com/janzeerathnan/ICST_Timer.git",
+    codeUrl: "https://github.com/janzeerathnan/Why-To-Fashion.git",
     color: "from-neon-violet to-neon-purple"
   },
     {
@@ -69,7 +69,7 @@ export const projects: Project[] = [
     description: "ZARA Fashion is a comprehensive, production-ready Flutter e-commerce mobile application",
     technologies: ["Flutter", "Dart" , "FireBase"],
   image: ZaraFashionImg,
-    codeUrl: "https://github.com/janzeerathnan/ICST_Timer.git",
+    codeUrl: "https://github.com/janzeerathnan/Zara-Fashion-Mobile-App.git",
     color: "from-neon-violet to-neon-purple"
   }
 ];
