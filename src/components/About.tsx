@@ -6,8 +6,8 @@ import { Calendar, Briefcase, Award, MapPin } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-performance";
 
 const stats = [
-  { label: "Years Experience", value: 1, icon: Calendar },
-  { label: "Projects Delivered", value: 4, icon: Briefcase },
+  { label: "Years Experience", value: 3, icon: Calendar },
+  { label: "Projects Delivered", value: 10, icon: Briefcase },
   { label: "Awards Won", value: 1, icon: Award },
 ];
 
@@ -123,10 +123,7 @@ const About = () => {
               transition={{ duration: 0.8, delay: 0.4 }}
             >
               <div className="space-y-6">
-                <div className="flex items-center gap-2 text-muted-foreground">
-                  <MapPin className="w-4 h-4 text-primary" />
-                  <span>Based in Singapore</span>
-                </div>
+                
 
                 <p className="text-lg text-muted-foreground leading-relaxed">
                   I am a dedicated Software Engineer with experience in developing full-stack web applications, 
